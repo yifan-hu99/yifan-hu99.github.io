@@ -21,7 +21,7 @@ WECHAT_ENABLED=true
 XIAOHONGSHU_ENABLED=true
 ```
 
-`DIRECT_URL` defaults to `DATABASE_URL`; use the provider's direct URL when the application URL is a transaction pooler. Never prefix database credentials or provider keys with `NEXT_PUBLIC_`.
+`DIRECT_URL` defaults to the Marketplace-provided `DATABASE_URL_UNPOOLED` / `POSTGRES_URL_NON_POOLING`, then `DATABASE_URL`; use the provider's direct URL when the application URL is a transaction pooler. Never prefix database credentials or provider keys with `NEXT_PUBLIC_`.
 
 ## Build and deploy
 
