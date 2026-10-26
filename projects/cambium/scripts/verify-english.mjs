@@ -1,0 +1,7 @@
+import {chromium} from 'playwright';
+const b=await chromium.launch({executablePath:'C:/Users/evely/Documents/Codex/2026-10-24/bu-i/work/browsers/chromium-1248/chrome-win64/chrome.exe'});
+const p=await b.newPage({viewport:{width:1440,height:1000}});p.setDefaultTimeout(90000);
+const base='http://127.0.0.1:3000';const state=await (await p.request.get(base+'/api/state',{timeout:90000})).json();let id;
+for(const c of state.conversations.slice(0,15)){const d=await(await p.request.get(base+'/api/conversations/'+c.id,{timeout:90000})).json();if(d.messages?.some(m=>m.blocks?.opportunities?.some(o=>!o.demo))){id=c.id;console.log('Translated titles:',d.messages.flatMap(m=>m.blocks?.opportunities?.map(o=>o.title)||[]));break;}}
+await p.goto(base);if(id){await p.evaluate(id=>localStorage.setItem('cambium.currentConversation',id),id);await p.reload();await p.locator('.opportunity').first().waitFor();const gate=p.getByRole('dialog',{name:'Complete your profile before a new chat'});if(await gate.isVisible())await gate.getByRole('button',{name:'Continue this chat and explore results'}).click();const text=(await p.locator('.opportunity').allTextContents()).join(' ');console.log('Chinese characters in cards:',/\p{Script=Han}/u.test(text));console.log('Translation fallback:',text.includes('translation unavailable'));await p.screenshot({path:'../cambium-english-ui.png'});}
+await p.setViewportSize({width:390,height:844});console.log('Mobile overflow:',await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth));await b.close();
