@@ -1,6 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { writeFileSync,renameSync,readFileSync,mkdirSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
+if(process.env.VERCEL){const result=spawnSync(process.execPath,['node_modules/next/dist/bin/next','build','--webpack'],{stdio:'inherit',env:process.env});process.exit(result.status||0);}
 // A fresh output directory avoids Windows ACL/cache collisions on repeated builds.
 // The last successful build remains runnable if the next build fails.
 const dir='.cambium-build/build-'+randomUUID().slice(0,8);

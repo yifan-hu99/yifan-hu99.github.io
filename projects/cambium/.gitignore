@@ -21,3 +21,5 @@ data/
 playwright/.auth/
 .auth/
 coverage/
+
+.vercel/

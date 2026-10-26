@@ -4,7 +4,7 @@ A running, local, single-user rebuild of the attached opportunity-agent kits. Co
 
 ## Start
 
-Requires Node.js 22.13+ (Node 24 LTS recommended) and npm.
+Requires Node.js 24 and npm.
 
 ```powershell
 npm install
@@ -77,3 +77,11 @@ Calendar is an independent top navigation feature alongside Profile. It supports
 
 ## Personalized home discovery
 With real search history, homepage cards reuse qualifying historical results for the most recent search intent, excluding dismissed and expired listings. Cards are labeled Previously found. Suggested prompts are reconstructed in English from up to three distinct recent search intents. Raw chat text and profiles are not needed to build these prompts. New users retain the default Remotive preview. No background provider search is triggered by reading history.
+
+## Railway deployment
+
+See [Railway setup](docs/RAILWAY.md) for a Docker deployment with a persistent SQLite volume, startup migrations, health checks and password-protected access. Source lives in `projects/cambium` in the GitHub repository. This remains one shared private workspace, not isolated user accounts.
+
+## Vercel deployment
+
+See [Vercel setup](docs/VERCEL.md). Set Root Directory to `projects/cambium`, connect PostgreSQL storage, and configure server-side secrets in Vercel. Production builds generate the PostgreSQL client and apply its migrations. Local development still uses SQLite.

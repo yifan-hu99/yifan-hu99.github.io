@@ -1,3 +1,4 @@
+import {cachePath} from './storage-path';
 import {sourcePay} from './compensation';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
@@ -13,7 +14,7 @@ async function translations(values:string[]):Promise<Translation|null>{
  const key=createHash('sha256').update('english-source-v1'+JSON.stringify(values)).digest('hex');
  const existing=inFlight.get(key);if(existing)return existing;
  const task=(async()=>{
-  const file=path.join(process.cwd(),'data','english',key+'.json');
+  const file=cachePath('english',key+'.json');
   const validate=(data:unknown):Translation=>{const result=response.parse(data).translations;if(result.length!==values.length)throw new Error('Invalid translation length');
    return result.map((value,i)=>{if(!value?.trim()||hasChinese(value))return null;const emails=values[i].match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g)||[];return emails.every(email=>value.includes(email))?value:null;});};
   try{return validate(JSON.parse(await readFile(file,'utf8')));}catch{}

@@ -12,6 +12,7 @@ import { guard, ApiError } from '@/lib/security';
 import { plan, search, sourceHealth, rank, searchSummary, remotive, dedupe, qualifies, extractIntent } from '@/lib/search';
 import { statuses, type Intent, type Opportunity, type ChatMessage, type ProfileData } from '@/lib/types';
 export const runtime='nodejs';
+export const maxDuration=300;
 export const dynamic='force-dynamic';
 const json=(v:unknown)=>JSON.parse(JSON.stringify(v)) as Prisma.InputJsonValue;
 const profileSchema=z.object({name:z.string().max(200),location:z.string().max(300),skills:z.string().max(5000),preferences:z.string().max(5000),portfolio:z.string().max(1000),useForMatching:z.boolean(),useForDrafts:z.boolean()});
@@ -28,6 +29,8 @@ async function libraryItems(){
 function fail(e:unknown) { if(e instanceof ApiError) return NextResponse.json({error:{code:e.code,message:e.message}},{status:e.status}); if(e instanceof z.ZodError || e instanceof SyntaxError) return NextResponse.json({error:{code:'INVALID_INPUT',message:'Please check your input and try again.'}},{status:400}); console.error('API request failed:',e instanceof Error?e.name:'Unknown'); return NextResponse.json({error:{code:'SERVER_ERROR',message:'The request could not be completed. Please retry.'}},{status:500}); }
 async function handle(req:NextRequest,ctx:{params:Promise<{path:string[]}>}) {
  try {
+  const requested=(await ctx.params).path.join('/');
+  if(requested==='health'&&req.method==='GET'){try{await db.$queryRaw`SELECT 1`;return NextResponse.json({status:'ok'});}catch{return NextResponse.json({status:'unavailable'},{status:503});}}
   guard(req);
   const p=(await ctx.params).path; const route=p.join('/'); const method=req.method;
   if(route==='app-version'&&method==='GET')return NextResponse.json({version:process.env.NEXT_PUBLIC_CAMBIUM_VERSION||'development'},{headers:{'Cache-Control':'no-store, max-age=0'}});

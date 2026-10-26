@@ -1,3 +1,4 @@
+import {cachePath} from './storage-path';
 import {sourcePay} from './compensation';
 import {intentFamily,taskMatches} from './intent-relevance';
 import { createHash } from 'node:crypto';
@@ -83,7 +84,7 @@ const pending=new Map<string,Promise<Opportunity[]>>();
 const memory=new Map<string,{at:number;jobs:Opportunity[]}>();
 async function cached(key:string,fetcher:()=>Promise<Opportunity[]>):Promise<Opportunity[]>{
  const hash=createHash('sha256').update(key).digest('hex').slice(0,24);
- const file=path.join(process.cwd(),'data','wechat',hash+'.json');
+ const file=cachePath('wechat',hash+'.json');
  const current=memory.get(hash);if(current&&Date.now()-current.at<3600000)return current.jobs;
  if(pending.has(hash))return pending.get(hash)!;
  const task=(async()=>{
