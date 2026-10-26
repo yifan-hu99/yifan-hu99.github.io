@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-10-24T04:41:28.109Z",
+  "httpStatus": 200,
+  "summary": "I found 3 source-backed opportunities. Check the evidence and uncertainties before reaching out.",
+  "sources": [
+    {
+      "id": "Remotive",
+      "status": "ok",
+      "detail": "Public remote-job API. Six-hour cache; 24-hour source delay. Live availability checked on search. Retrieved successfully.",
+      "count": 3
+    },
+    {
+      "id": "Tavily",
+      "status": "unconfigured",
+      "detail": "Public web search requires WEB_SEARCH_API_KEY."
+    },
+    {
+      "id": "DeepSeek",
+      "status": "unconfigured",
+      "detail": "Using deterministic intent extraction; no LLM is connected."
+    },
+    {
+      "id": "WeChat",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    },
+    {
+      "id": "BOSS",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    },
+    {
+      "id": "Xiaohongshu",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    },
+    {
+      "id": "LinkedIn",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    }
+  ],
+  "metrics": {
+    "candidates": 3,
+    "rejected": 0,
+    "duplicates": 0,
+    "durationMs": 6
+  },
+  "opportunities": [
+    {
+      "title": "Software Engineer, AI Coding Tasks",
+      "organization": "Askable",
+      "url": "https://remotive.com/remote-jobs/software-development/software-engineer-ai-coding-tasks-2091158",
+      "source": "Remotive",
+      "publishedAt": "2026-10-17T08:04:29.000Z",
+      "demo": false
+    },
+    {
+      "title": "Tech Lead Full-Stack Rails Engineer",
+      "organization": "Mitre Media",
+      "url": "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746",
+      "source": "Remotive",
+      "publishedAt": "2026-10-14T12:33:44.000Z",
+      "demo": false
+    },
+    {
+      "title": "Senior back-end Engineer",
+      "organization": "Lemon.io",
+      "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-engineer-2091132",
+      "source": "Remotive",
+      "publishedAt": "2026-09-30T05:15:26.000Z",
+      "demo": false
+    }
+  ]
+}

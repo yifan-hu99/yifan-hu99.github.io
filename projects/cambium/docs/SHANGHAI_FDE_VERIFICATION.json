@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-24T14:39:04.040Z",
+  "status": 200,
+  "conversationId": "cmvmi84a30000sxo89zdhppsq",
+  "text": "I found 3 source-backed opportunities in Shanghai using Remotive and WeChat. Open each original recruitment post to verify availability and application instructions.",
+  "intent": {
+    "query": "Find AI Forward Deployed Engineer (FDE) jobs in Shanghai. I want to build and deploy AI solutions for customers. Full-time preferred; include the original job posting and how to apply.",
+    "roles": [
+      "AI Forward Deployed Engineer",
+      "Forward Deployed Engineer"
+    ],
+    "location": "Shanghai",
+    "remote": false,
+    "contract": false,
+    "excludeFullTime": false,
+    "horizon": 60
+  },
+  "sources": [
+    {
+      "id": "Remotive",
+      "status": "ok",
+      "detail": "Public remote-job API. Six-hour cache; 24-hour source delay. Live availability checked on search. Retrieved 0 recruitment candidates.",
+      "count": 0
+    },
+    {
+      "id": "Tavily",
+      "status": "unconfigured",
+      "detail": "Public web search requires WEB_SEARCH_API_KEY."
+    },
+    {
+      "id": "DeepSeek",
+      "status": "configured",
+      "detail": "Server-side intent planning enabled."
+    },
+    {
+      "id": "WeChat",
+      "status": "ok",
+      "detail": "Just One API article search V2 and article details V4. Up to two Chinese queries and three article checks per search, cached for one hour. Recruitment posts only; editorials are excluded. Retrieved 8 recruitment candidates.",
+      "count": 8
+    },
+    {
+      "id": "BOSS",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    },
+    {
+      "id": "Xiaohongshu",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    },
+    {
+      "id": "LinkedIn",
+      "status": "disabled",
+      "detail": "Authorized endpoint and account entitlement have not been validated. No requests are made."
+    }
+  ],
+  "opportunities": [
+    {
+      "title": "招募令｜ FDE 前沿部署工程师：把 AI 带进真实的业务世界",
+      "organization": "Datablau",
+      "location": "Shanghai / Beijing / Shenzhen",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI5NDY1MDgxMg%3D%3D&mid=2247518621&idx=1&sn=4182feb241b98fbbbdaa96ee6cbd8deb",
+      "compensation": "Not disclosed",
+      "contact": "mailto:jinbao.zhu@datablau.com",
+      "source": "WeChat · Just One API · article checked",
+      "demo": false
+    },
+    {
+      "title": "FDE 工程师 招聘",
+      "organization": "知识工场",
+      "location": "Shanghai",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI0MTI1Nzk1MA%3D%3D&mid=2651707535&idx=1&sn=4c4da83e80807d7dc99875c4ccad0319",
+      "compensation": "Not disclosed",
+      "contact": "mailto:zhuli@fudan.edu.cn",
+      "source": "WeChat · Just One API · article checked",
+      "demo": false
+    },
+    {
+      "title": "上海 社招 | 皓元医药-AI前端部署工程师/飞书部署工程师/ FDE",
+      "organization": "探星AI职招",
+      "location": "Shanghai",
+      "url": "https://mp.weixin.qq.com/s?__biz=Mzk4ODA4MDA1OQ%3D%3D&mid=2247492488&idx=2&sn=020e54685443fb8923222f8a55b6f9c2",
+      "compensation": "10-20k·13薪",
+      "contact": null,
+      "source": "WeChat · Just One API · article checked",
+      "demo": false
+    }
+  ]
+}
