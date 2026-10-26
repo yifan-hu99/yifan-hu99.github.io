@@ -113,7 +113,7 @@ async function articleBody(url:string):Promise<{text:string;html:string}>{
 }
 export async function searchWechat(intent:Intent):Promise<Opportunity[]> {
  if(!wechatConfigured())return [];
- const key=JSON.stringify({schema:'wechat-v4-task-relevance',queries:wechatQueries(intent),location:intent.location,roles:intent.roles,contract:intent.contract,excludeFullTime:intent.excludeFullTime,horizon:intent.horizon,roleFamily:intent.roleFamily,aiRequired:intent.aiRequired,industry:intent.industry,engagementPreference:intent.engagementPreference,industryRequired:intent.industryRequired,allowAdjacent:intent.allowAdjacent});
+ const key=JSON.stringify({schema:'wechat-v5-pay-context',queries:wechatQueries(intent),location:intent.location,roles:intent.roles,contract:intent.contract,excludeFullTime:intent.excludeFullTime,horizon:intent.horizon,roleFamily:intent.roleFamily,aiRequired:intent.aiRequired,industry:intent.industry,engagementPreference:intent.engagementPreference,industryRequired:intent.industryRequired,allowAdjacent:intent.allowAdjacent});
  return cached(key,async()=>{
   const opportunities:Opportunity[]=[];const seen=new Set<string>();let detailsUsed=0;
   const queries=wechatQueries(intent);
