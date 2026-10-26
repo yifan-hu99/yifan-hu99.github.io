@@ -1,3 +1,4 @@
+import {cachePath} from './storage-path';
 import {searchXiaohongshu,xiaohongshuConfigured,xiaohongshuDiagnostics} from './xiaohongshu';
 import {detectRoleFamily,intentFamily,taskMatches,hasAI,hasFinance,hasFreelance} from './intent-relevance';
 import { createHash } from 'node:crypto';
@@ -93,7 +94,7 @@ const remotiveSchema = z.object({jobs:z.array(z.object({id:z.number(),url:z.stri
 const clean = (s:string) => s.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&amp;|&#\d+;/g,' ').replace(/\s+/g,' ').trim();
 let remotivePending: Promise<Opportunity[]>|null = null;
 async function remotiveJobs(): Promise<Opportunity[]> {
-  const file = path.join(process.cwd(),'data','remotive-cache.json');
+  const file = cachePath('remotive-cache.json');
   try { const c = JSON.parse(await readFile(file,'utf8')); if (Date.now()-c.at < 6*3600000) return c.jobs; } catch {}
   const response = await fetch('https://remotive.com/api/remote-jobs',{signal:AbortSignal.timeout(15000),headers:{'User-Agent':'CambiumLocal/1.0'},redirect:'error'});
   if (!response.ok) throw new Error('UPSTREAM_HTTP_' + response.status);

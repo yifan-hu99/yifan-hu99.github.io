@@ -1,3 +1,4 @@
+import {cachePath} from './storage-path';
 import {sourcePay} from './compensation';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
@@ -71,7 +72,7 @@ export async function searchRedNotes(keyword:string,signal?:AbortSignal):Promise
 }
 export async function searchXiaohongshu(i:Intent):Promise<Opportunity[]>{
  if(!xiaohongshuConfigured())return [];
- const key=cacheKey(i),file=path.join(process.cwd(),'data','xiaohongshu',key+'.json');
+ const key=cacheKey(i),file=cachePath('xiaohongshu',key+'.json');
  try{const d=JSON.parse(await readFile(file,'utf8'));if(Date.now()-d.at<(d.diagnostics?.status==='partial'?120000:3600000)){reports.set(key,d.diagnostics);return d.jobs;}}catch{}
  if(pending.has(key))return pending.get(key)!;
  const task=(async()=>{

@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack --hostname 127.0.0.1",
-    "build": "prisma generate && node scripts/build.mjs",
+    "build": "node scripts/generate-client.mjs && node scripts/build.mjs",
     "start": "next start --hostname 127.0.0.1",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "db:setup": "node scripts/init-db.mjs && prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "postinstall": "node scripts/generate-client.mjs",
+    "start:railway": "node scripts/start-railway.mjs",
+    "vercel-build": "node scripts/build-vercel.mjs"
   },
   "dependencies": {
     "next": "16.4.3",
@@ -36,5 +38,8 @@
     "@playwright/test": "^1.56.0",
     "tailwindcss": "^4.1.0",
     "@tailwindcss/postcss": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }
