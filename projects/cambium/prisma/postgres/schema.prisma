@@ -6,6 +6,8 @@ datasource db {
   url = env("DATABASE_URL")
 }
 model Conversation {
+  ownerId String @default("legacy")
+  @@index([ownerId])
   id String @id @default(cuid())
   title String
   intent Json
@@ -34,6 +36,8 @@ model SearchRun {
   createdAt DateTime @default(now())
 }
 model Opportunity {
+  ownerId String @default("legacy")
+  @@index([ownerId])
   id String @id
   payload Json
   createdAt DateTime @default(now())
@@ -41,8 +45,11 @@ model Opportunity {
   drafts OutreachDraft[]
 }
 model LibraryItem {
+  ownerId String @default("legacy")
+  @@index([ownerId])
   id String @id @default(cuid())
-  opportunityId String @unique
+  opportunityId String
+  @@unique([ownerId, opportunityId])
   opportunity Opportunity @relation(fields: [opportunityId], references: [id])
   status String @default("SAVED")
   notes String @default("")
@@ -70,6 +77,8 @@ model Profile {
   onboardingCompleted Boolean @default(false)
 }
 model Resume {
+  ownerId String @default("legacy")
+  @@index([ownerId])
   id String @id @default(cuid())
   filename String
   text String
@@ -77,6 +86,8 @@ model Resume {
   createdAt DateTime @default(now())
 }
 model OutreachDraft {
+  ownerId String @default("legacy")
+  @@index([ownerId])
   id String @id @default(cuid())
   opportunityId String
   opportunity Opportunity @relation(fields: [opportunityId], references: [id])

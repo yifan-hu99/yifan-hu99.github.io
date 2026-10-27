@@ -1,7 +1,13 @@
 import {NextRequest,NextResponse} from 'next/server';
-import {validAccess} from '@/lib/access';
+import {newVisitor,visitorCookie,visitorOwner} from './lib/visitor';
 export function proxy(req:NextRequest){
- if(!validAccess(req.headers.get('authorization')))return new NextResponse('Sign in to Cambium.',{status:401,headers:{'WWW-Authenticate':'Basic realm="Cambium", charset="UTF-8"','Cache-Control':'no-store'}});
- const response=NextResponse.next();response.headers.set('Cache-Control','private, no-store');return response;
+ let token=req.cookies.get(visitorCookie)?.value;
+ const fresh=!visitorOwner(token);if(fresh)token=newVisitor();
+ const headers=new Headers(req.headers);
+ if(fresh){const cookies=req.cookies.getAll().filter(c=>c.name!==visitorCookie).map(c=>c.name+'='+c.value);cookies.push(visitorCookie+'='+token);headers.set('cookie',cookies.join('; '));}
+ const response=NextResponse.next({request:{headers}});
+ if(fresh)response.cookies.set(visitorCookie,token!,{httpOnly:true,secure:req.nextUrl.protocol==='https:',sameSite:'lax',path:'/',maxAge:60*60*24*365});
+ response.headers.set('Cache-Control','private, no-store');return response;
 }
 export const config={matcher:['/((?!api/health$|_next/static|_next/image|favicon.ico).*)']};
+

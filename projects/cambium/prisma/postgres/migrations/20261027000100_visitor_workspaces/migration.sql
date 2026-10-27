@@ -1,0 +1,12 @@
+ALTER TABLE "Conversation" ADD COLUMN "ownerId" TEXT NOT NULL DEFAULT 'legacy';
+CREATE INDEX "Conversation_ownerId_idx" ON "Conversation"("ownerId");
+ALTER TABLE "Resume" ADD COLUMN "ownerId" TEXT NOT NULL DEFAULT 'legacy';
+CREATE INDEX "Resume_ownerId_idx" ON "Resume"("ownerId");
+ALTER TABLE "LibraryItem" ADD COLUMN "ownerId" TEXT NOT NULL DEFAULT 'legacy';
+CREATE INDEX "LibraryItem_ownerId_idx" ON "LibraryItem"("ownerId");
+ALTER TABLE "OutreachDraft" ADD COLUMN "ownerId" TEXT NOT NULL DEFAULT 'legacy';
+CREATE INDEX "OutreachDraft_ownerId_idx" ON "OutreachDraft"("ownerId");
+ALTER TABLE "Opportunity" ADD COLUMN "ownerId" TEXT NOT NULL DEFAULT 'legacy';
+CREATE INDEX "Opportunity_ownerId_idx" ON "Opportunity"("ownerId");
+DROP INDEX "LibraryItem_opportunityId_key";
+CREATE UNIQUE INDEX "LibraryItem_ownerId_opportunityId_key" ON "LibraryItem"("ownerId", "opportunityId");

@@ -36,3 +36,7 @@ Health check: `/api/health` returns a generic status after querying the database
 Deploy a production build, test password protection, database health, chat/save behavior and a real source search, then verify the production domain. A successful build alone does not establish that the application is usable.
 
 References: [Marketplace storage](https://vercel.com/docs/marketplace-storage), [monorepo projects](https://vercel.com/docs/monorepos), [environment variables](https://vercel.com/docs/environment-variables).
+
+## Public visitor workspaces
+
+The public application no longer uses browser Basic authentication. Each browser receives a random, HttpOnly, SameSite visitor cookie over HTTPS. Conversations, resumes, profiles, saved opportunities and outreach drafts are isolated by that visitor identity. Existing records remain in the legacy workspace and are not assigned to public visitors. Clearing cookies or switching browsers starts a new workspace; anonymous workspaces do not sync between devices. Keep Vercel deployment protection disabled for the production domain. APP_ACCESS_PASSWORD remains a server-side legacy access secret; it is never sent to public visitors.
